@@ -19,10 +19,27 @@ namespace Project1_3Bucket
             IsFinalState = isFinalState;
         }
 
+        private State parent, firstChild, nextSibling;
+
+        public State Parent
+        {
+            get
+            {
+                return parent;
+            }
+        }
+
         public Bucket SmallBucket { get; set; }
         public Bucket MediumBucket { get; set; }
         public Bucket LargeBucket { get; set; }
         public bool IsFinalState { get; set; }
+
+        public void InsertChild(State newChild)
+        {
+            newChild.parent = this;
+            newChild.nextSibling = firstChild;
+            firstChild = newChild;
+        }
 
         public override bool Equals(object obj)
         {
