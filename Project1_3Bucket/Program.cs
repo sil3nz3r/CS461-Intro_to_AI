@@ -47,28 +47,29 @@ namespace Project1_3Bucket
                 State currentState = queue.Dequeue();
                 if (visitedStates.Any(state => state == currentState))
                 {
-                    //visitedStates.Add(currentState);
-                    //Console.WriteLine("Dead end!");
+                    // We have been in this state before
+                    // Avoid looping
                     continue;
                 }
                 visitedStates.Add(currentState);
+                Console.Write("\rNumber of states visited(non - unique): {0}    ", visitedStates.Count);
                 queue = GenerateMoreStates(currentState, queue);
                 if (currentState.Equals(finalState))
                 {
+                    // Found the solution
                     solutionState = currentState;
-                    Console.WriteLine("Solution found!");
-                    Console.WriteLine("(" + currentState.SmallBucket.AmountOfWater + ", " +
-                        currentState.MediumBucket.AmountOfWater + ", " +
-                        currentState.LargeBucket.AmountOfWater + ")");
                     break;
                 }
             }
 
-            Console.WriteLine(">>>>>>Done");
-            Console.WriteLine("Number of states visited (non-unique): " + visitedStates.Count);
+            Console.WriteLine("\n>>>>>>Done");
 
             if (solutionState != null)
             {
+                Console.WriteLine("\nSolution found:");
+                Console.WriteLine("(" + solutionState.SmallBucket.AmountOfWater + ", " +
+                    solutionState.MediumBucket.AmountOfWater + ", " +
+                    solutionState.LargeBucket.AmountOfWater + ")");
                 Console.WriteLine("Solution:");
                 while (solutionState != null)
                 {
