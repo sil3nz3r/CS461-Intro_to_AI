@@ -1,0 +1,4 @@
+GOLD 3 2
+PIT 1 3
+PIT 2 4
+WUMPUS 3 3
